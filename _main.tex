@@ -1,0 +1,80 @@
+% koma_env.tex
+\documentclass[a4paper]{scrlttr2}
+\usepackage[top=2cm, bottom=1cm, left=2cm, right=2cm]{geometry}
+\usepackage{graphicx}
+\usepackage{lmodern}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[ngerman]{babel}
+\usepackage{color}
+\usepackage[hidelinks]{hyperref}
+
+\usepackage[german]{invoice}
+
+
+\renewcommand{\familydefault}{\sfdefault}
+
+% include meta data
+\include{_data}
+
+\setkomavar{fromname}{\senderName}
+\setkomavar{fromaddress}{\senderStreet \\ \senderZIP \ \senderCity}
+\setkomavar{place}{\senderCity}
+\setkomavar{date}{\invoiceDate}
+\setkomavar{fromphone}{\senderTelephone}
+\setkomavar{frommobilephone}{\senderMobilephone}
+\setkomavar{fromemail}{\href{mailto:\senderEmail}{\nolinkurl{\senderEmail}}}
+\setkomavar{subject}{Rechnung}
+\setkomavar{location}{
+  \\[\baselineskip] \\[\baselineskip]
+  \flushright \small {\vspace{1cm}Rechnungsnummer: 
+  \invoiceReference}
+}
+
+\setkomavar{firsthead}{\hfill
+   \parbox[t][\headheight][t]{6cm}{%
+   \footnotesize
+   \raggedright
+   \flushright
+   \color[gray]{.3}%
+	\begin{tabular}{rl}
+		 Anschrift & \usekomavar{fromname}\\
+		 & \senderStreet\\
+		 & \senderZIP  \ \senderCity \\
+		 \\
+		 %\Telefon \ Telefon:  \` \senderTelephone \\
+		 Mobil  & \usekomavar{frommobilephone} \\
+		 E-Mail  & \usekomavar{fromemail} \\
+		 Webseite & {\normalfont\ttfamily  \senderWeb } \\
+		 \\
+		 Steuernummer & \taxID \\
+		 \\
+		 Institut & \accountBankName \\
+		 IBAN & \accountIBAN \\
+		 BIC & \accountBIC
+	\end{tabular}	 			    
+   }%
+}
+
+
+\begin{document}
+	\begin{letter}{\customerCompany \\ \customerName \\ 
+	\customerStreet \\ \customerZIP \ \customerCity}
+	
+			\includegraphics[width=0.15\textwidth]{logo.png}			
+			\opening{\invoiceSalutation}
+			\invoiceText
+		    \begin{invoice}{Euro}{0}
+			    \input{_invoice}
+		    \end{invoice}
+		\ps Im ausgewiesenen Betrag ist gemäß § 19 UStG keine Umsatzsteuer 
+		enthalten.
+
+		\closing{\invoiceClosing}
+		\invoiceEnclosures
+
+
+
+	\end{letter}
+\end{document}
+
