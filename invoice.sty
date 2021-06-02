@@ -795,7 +795,7 @@
 	%			and amount of discount
 	%
 	\gdef\Discount@Contents{#1}%
-	\setcounter{Discount}{100 * \real{-#2}}%
+	\setcounter{Discount}{(1000 * \real{-#2} - 5) / 10}%
 }%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \newcommand{\Total@Reset}{%
