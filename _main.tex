@@ -13,6 +13,14 @@
 
 % invoice2 will attempt to use the language set by babel (if availible in the package):
 \usepackage[]{invoice2}
+\usepackage[]{eurosym}
+
+% Customization of invoice labels:
+\usepackage[]{translations}
+\DeclareTranslation{German}{invoice2-unit-price}{Preis/Stunde}
+\DeclareTranslation{German}{invoice2-price}{Betrag}
+\DeclareTranslation{German}{invoice2-item}{Bezeichnung}
+
 
 
 \renewcommand{\familydefault}{\sfdefault}
@@ -67,9 +75,9 @@
 			\includegraphics[width=0.15\textwidth]{logo.png}			
 			\opening{\invoiceSalutation}
 			\invoiceText
-		    \begin{invoice}{Euro}{0}
-			    \input{_invoice}
-		    \end{invoice}
+			\begin{invoice}[currency-symbol = {\euro{}}, currency-in-header=true]
+				\input{_invoice}
+			\end{invoice}
 		\ps Im ausgewiesenen Betrag ist gemäß § 19 UStG keine Umsatzsteuer 
 		enthalten.
 		
